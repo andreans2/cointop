@@ -4,5 +4,12 @@ config:
   php: 8.2
   webroot: .
 services:
-  phpmyadmin:
-    type: phpmyadmin
+  database:
+    type: mysql
+    creds:
+      user: lamp
+      password: lamp
+      database: lamp
+    config:
+      files:
+        - database/schema.sql

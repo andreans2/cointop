@@ -16,6 +16,28 @@ class CryptoRepository
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+
+    public function fetchAndSaveFromApi(string $apiKey): array
+    {
+        $fetcher = new Fetcher($apiKey);
+        $raw = $fetcher->fetch();
+
+        $cryptos = array_map(function ($coin) {
+            return [
+                'symbol' => $coin['symbol'],
+                'name' => $coin['name'],
+                'price' => $coin['quote']['USD']['price'],
+                'percent_change_24h' => $coin['quote']['USD']['percent_change_24h'],
+                'market_cap' => $coin['quote']['USD']['market_cap'],
+                'volume_24h' => $coin['quote']['USD']['volume_24h'],
+            ];
+        }, $raw);
+
+        $this->saveMany($cryptos);
+
+        return $cryptos;
+    }
+
     public function saveMany(array $cryptos): void
     {
         try {
@@ -35,7 +57,7 @@ class CryptoRepository
                     ':symbol' => $crypto['symbol'],
                     ':name' => $crypto['name'],
                     ':price' => $crypto['price'],
-                    ':percent_change_24h' => $crypto['change_24h'],
+                    ':percent_change_24h' => $crypto['percent_change_24h'],
                     ':market_cap' => $crypto['market_cap'],
                     ':volume_24h' => $crypto['volume_24h'],
                 ]);
