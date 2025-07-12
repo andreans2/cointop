@@ -17,4 +17,4 @@ services:
 
 events:
   post-start:
-    - database: mysql -ulamp -plamp lamp < /app/database/schema.sql
+    - database: mysql -h database -ulamp -plamp lamp < /app/database/schema.sql
