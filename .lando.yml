@@ -13,5 +13,8 @@ services:
     config:
       files:
         - database/schema.sql
+    overrides:
+      volumes:
+        - ./database:/docker-entrypoint-startdb.d
   phpmyadmin:
     type: phpmyadmin
