@@ -20,6 +20,14 @@
 
 ### Установка
 
+### Lando
+
+1. Перейдите на https://docs.lando.dev/install/windows.html
+2. Скачайте и установите версию для вашей ОС
+3. После установки перезапустите терминал
+4. Проверьте установку командой `lando version`
+
+
 ```bash
 git clone https://github.com/andreans2/cointop.git
 
