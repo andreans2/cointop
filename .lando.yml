@@ -3,17 +3,18 @@ recipe: lamp
 config:
   php: 8.2
   webroot: .
-  database: mysql:8.0
-  services:
-    database:
-      creds:
-        user: lamp
-        password: lamp
-        database: lamp
-      config:
-        files:
-          - database/schema.sql
 
 services:
+  database:
+    type: mysql
+    creds:
+      user: lamp
+      password: lamp
+      database: lamp
+
   phpmyadmin:
     type: phpmyadmin
+
+events:
+  post-start:
+    - database: mysql -ulamp -plamp lamp < /app/database/schema.sql
