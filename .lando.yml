@@ -12,9 +12,11 @@ services:
       password: lamp
       database: lamp
 
+
   phpmyadmin:
     type: phpmyadmin
 
 events:
   post-start:
-    - database: mysql -h database -ulamp -plamp lamp < /app/database/schema.sql
+    - appserver: mysql -h database -ulamp -plamp lamp < /app/database/schema.sql
+
