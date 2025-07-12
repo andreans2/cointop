@@ -13,3 +13,5 @@ services:
     config:
       files:
         - database/schema.sql
+  phpmyadmin:
+    type: phpmyadmin
